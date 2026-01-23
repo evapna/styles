@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" delimiter-precedes-et-al="never" delimiter-precedes-last="always" default-locale="de-AT">
+  <info>
+    <title>historia.scribere (Deutsch) 2026</title>
+    <id>http://www.zotero.org/styles/historiascribere-2026</id>
+    <link href="http://www.zotero.org/styles/historiascribere-2026" rel="self"/>
+    <link href="https://historia.scribere.at/" rel="documentation"/>
+    <author><name>Eva Pfanzelter</name></author>   
+    <author><name>Alexander Renner</name></author>   
+    <author><name>Gemini 3 AI cleaning and wellforming</name></author>
+    <category citation-format="note"/>
+    <category field="history"/>
+    <updated>2026-01-24T01:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="de">
+    <terms>
+      <term name="ibid" form="long">ebenda</term>
+      <term name="accessed">eingesehen</term>
+      <term name="et-al">u. a.</term>
+      <term name="editor" form="short">Hrsg.</term>
+      <term name="interviewer" form="verb">Interview geführt von</term>
+      <term name="reviewed-author">Rezension zu</term>
+      <term name="issue" form="short">Nr.</term>
+    </terms>
+  </locale>
+
+  <macro name="creator">
+    <names variable="author">
+      <name delimiter="/" et-al-min="4" et-al-use-first="1"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="composer"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="creator-bib">
+    <names variable="author">
+      <name delimiter="/" et-al-min="4" et-al-use-first="3" name-as-sort-order="all"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <choose>
+      <if type="graphic">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else-if type="review">
+        <group delimiter=" ">
+          <text term="reviewed-author"/>
+          <text variable="reviewed-title" font-style="italic"/>
+        </group>
+      </else-if>
+      <else-if type="interview">
+        <group delimiter=", ">
+          <text variable="title"/>
+          <names variable="interviewer">
+            <label form="verb" suffix=" "/>
+            <name delimiter="/"/>
+          </names>
+        </group>
+      </else-if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="container">
+    <choose>
+      <if type="chapter paper-conference" match="any">
+        <group delimiter=", " prefix="in: ">
+          <names variable="editor">
+            <name delimiter="/" et-al-min="4" et-al-use-first="3"/>
+            <label form="short" prefix=" (" suffix=")"/>
+          </names>
+          <text variable="container-title"/>
+        </group>
+      </if>
+      <else-if type="article-journal article-newspaper article-magazine" match="any">
+        <group delimiter=", " prefix="in: ">
+          <text variable="container-title" font-style="italic"/>
+          <choose>
+            <if type="article-journal">
+              <group delimiter=" ">
+                <number variable="volume"/>
+                <date variable="issued" prefix="(" suffix=")">
+                  <date-part name="year"/>
+                </date>
+                <number variable="issue" prefix=", "/>
+              </group>
+            </if>
+            <else>
+              <group delimiter=" ">
+                <text term="issue" form="short"/>
+                <text variable="issue"/>
+              </group>
+              <date variable="issued" form="numeric"/>
+            </else>
+          </choose>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+
+  <macro name="imprint">
+    <choose>
+      <if type="graphic">
+        <group delimiter=", ">
+          <text variable="publisher-place"/>
+          <text variable="archive_location"/>
+        </group>
+      </if>
+      <else-if type="manuscript article" match="any">
+        <group delimiter=", ">
+          <text variable="archive"/>
+          <text variable="archive_location"/>
+          <date variable="issued" form="numeric"/>
+        </group>
+      </else-if>
+      <else-if type="thesis">
+        <group delimiter=", ">
+          <text variable="genre"/>
+          <text variable="publisher-place"/>
+          <text variable="publisher"/>
+          <date variable="issued"><date-part name="year"/></date>
+        </group>
+      </else-if>
+      <else-if type="article-journal article-newspaper article-magazine" match="none">
+        <group delimiter=" ">
+          <group delimiter=": ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+          <date variable="issued"><date-part name="year"/></date>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+
+  <macro name="identifiers">
+    <group delimiter=", ">
+      <choose>
+        <if variable="DOI">
+          <text variable="DOI" prefix="[DOI " suffix="]"/>
+        </if>
+        <else-if variable="ISBN">
+          <text variable="ISBN" prefix="[ISBN " suffix="]"/>
+        </else-if>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="access">
+    <choose>
+      <if variable="DOI" match="none">
+        <group delimiter=", ">
+          <text variable="URL"/>
+          <group delimiter=" ">
+            <text term="accessed"/>
+            <date variable="accessed" form="numeric"/>
+          </group>
+        </group>
+      </if>
+      <else>
+        <text variable="URL"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="locator">
+    <group delimiter=" ">
+      <text value="hier"/>
+      <choose>
+        <if variable="locator">
+          <label variable="locator" form="short"/>
+          <text variable="locator"/>
+        </if>
+      </choose>
+    </group>
+  </macro>
+
+  <citation>
+    <layout suffix="." delimiter="; ">
+      <choose>
+        <if position="ibid">
+          <group delimiter=", "><text term="ibid"/><text macro="locator"/></group>
+        </if>
+        <else-if position="subsequent">
+          <group delimiter=", "><text macro="creator"/><text variable="title" form="short"/><text macro="locator"/></group>
+        </else-if>
+        <else>
+          <group delimiter=", ">
+            <text macro="creator"/>
+            <text macro="title"/>
+            <text macro="container"/>
+            <group delimiter=" " prefix="(" suffix=")">
+              <text variable="collection-title"/>
+              <text variable="collection-number"/>
+            </group>
+            <text macro="identifiers"/>
+            <text macro="imprint"/>
+            <text macro="access"/>
+            <text macro="locator"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true">
+    <sort><key macro="creator-bib"/><key variable="issued" sort="descending"/></sort>
+    <layout suffix=".">
+      <group delimiter=", ">
+        <text macro="creator-bib"/>
+        <text macro="title"/>
+        <text macro="container"/>
+        <group delimiter=" " prefix="(" suffix=")">
+          <text variable="collection-title"/>
+          <text variable="collection-number"/>
+        </group>
+        <text macro="identifiers"/>
+        <text macro="imprint"/>
+        <choose>
+          <if type="article-journal chapter article-newspaper" match="any">
+            <text variable="page" prefix="S. "/>
+          </if>
+        </choose>
+        <text macro="access"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>
